@@ -97,15 +97,11 @@ public class FileManager {
     }
 
     private static void copyFile(File from, File to) throws IOException {
+        if (to.isDirectory()) {
+            to = new File(to.getPath() + "\\" + from.getName());
+        }
         if (!to.exists()) {
-            if (to.isDirectory()) {
-                to = new File(to.getPath() + "\\" + from.getName());
-            }
             to.createNewFile();
-        } else {
-           if (to.isDirectory()) {
-                to = new File(to.getPath() + "\\" + from.getName());
-            }
         }
         //read all byte from file
 
