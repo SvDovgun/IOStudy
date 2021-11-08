@@ -17,6 +17,14 @@ public class IOStudy {
         String content = readContent("test2.log");
         System.out.println(content);
 
+        File path = new File("C:\\Windows");
+        System.out.println(path.isDirectory());
+        File[] innerPaths = path.listFiles();
+        for (File innerPath : innerPaths) {
+            String type = innerPath.isFile() ? "FILE: " : "DIR: ";
+            System.out.println(type + innerPath);
+        }
+
     }
 
     static void writeContent(String path, String content) throws IOException {
