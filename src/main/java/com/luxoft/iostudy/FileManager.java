@@ -34,14 +34,14 @@ public class FileManager {
 
     }
 
-    public static File[] listFiles(String path) {
+    private static File[] listFiles(String path) {
         File pathDir = new File(path);
         File[] files = pathDir.listFiles();
         return files;
     }
 
     // public static int countFiles(String path) - принимает путь к папке,
-// возвращает количество файлов в папке и всех подпапках по пути
+    // возвращает количество файлов в папке и всех подпапках по пути
     public static int countFiles(String path) {
         int counter = 0;
         for (File object : listFiles(path)) {
@@ -55,7 +55,7 @@ public class FileManager {
     }
 
     // public static int countDirs(String path) - принимает путь к папке,
-// возвращает количество папок в папке и всех подпапках по пути
+    // возвращает количество папок в папке и всех подпапках по пути
     public static int countDirs(String path) {
         int counter = 0;
         for (File object : listFiles(path)) {
@@ -87,10 +87,9 @@ public class FileManager {
         to = new File(to.getPath());
         for (File file : from.listFiles()) {
             if (file.isFile()){
-                copyFile(file, new File(to.getPath() + "\\" + file.getName() ));
+                copyFile(file, new File(to.getPath() , file.getName() ));
             } else if (file.isDirectory()){
-                String toName = to.getPath() + "\\" + file.getName();
-                copyDir(file, new File(toName));
+                copyDir(file, new File(to.getPath() , file.getName()));
             }
 
         }
@@ -98,7 +97,7 @@ public class FileManager {
 
     private static void copyFile(File from, File to) throws IOException {
         if (to.isDirectory()) {
-            to = new File(to.getPath() + "\\" + from.getName());
+            to = new File(to.getPath() ,  from.getName());
         }
         if (!to.exists()) {
             to.createNewFile();
@@ -116,9 +115,8 @@ public class FileManager {
 
     public static void move(String from, String to) throws IOException { // - метод по перемещению папок и файлов.
         //Параметр from -путь к файлу или папке, параметр to - путь к папке куда будет производиться копирование.
-        File fileFrom = new File(from);
-        copy(from, to);
-        deleteFileDIR(fileFrom);
+        new File(from).renameTo(new File(to));
+
     }
 
     private static void deleteFileDIR(File fileFrom) {

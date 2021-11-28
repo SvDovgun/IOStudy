@@ -52,6 +52,12 @@ public class FileAnalyzer {
         outputStream.close();
     }
 
+    static int countInFile(String path, String word) throws IOException {
+        String content = readContent(path);
+        int count = countOfContain(content, word);
+        return  count ;
+    }
+
     static String readContent(String path) throws IOException {
         File pathToFile = new File(path);
         FileInputStream inputFileStream = new FileInputStream(pathToFile);
@@ -72,6 +78,13 @@ public class FileAnalyzer {
         }
         return  counter;
     }
+
+    static String[] countSentencesWith(String path, String searched) throws IOException {
+        String content = readContent(path);
+        String[] sentences = searchSentenceWith( content, searched);
+        return sentences;
+    }
+
 
     static String[] searchSentenceWith(String text, String searched) {
         int arrayLength = countOfContain(text, searched);
